@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,4 +13,14 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  constructor(private router: Router) {}
+
+  onLoginClick() {
+    this.router.navigate(['/login']);
+  }
+
+  get isLoginOrRegisterPage(): boolean {
+    return this.router.url === '/login' || this.router.url === '/register';
+  }
+}

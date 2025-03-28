@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './starter.component.scss'
 })
 export class StarterComponent {
+  constructor(private router: Router) {}
 
+  onLoginClick() {
+    this.router.navigate(['/login']);
+  }
 }

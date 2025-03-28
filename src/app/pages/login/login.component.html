@@ -15,5 +15,6 @@
   </nz-form-item>
   <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
   <span class="text-white mx-2">or</span>
-  <a class="text-blue-100 register-link" (click)="onRegisterClick()">Register now!</a>
+  <span class="text-blue-100 register-link cursor-pointer" (click)="onRegisterClick()">Register now!</span>
+  <app-error-alert [message]="errorMessage()"></app-error-alert>
 </form>

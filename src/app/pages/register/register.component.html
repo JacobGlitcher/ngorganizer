@@ -1,3 +1,4 @@
+<!-- src/app/register.component.html -->
 <form nz-form [formGroup]="validateForm" class="login-form bg-blue-950 rounded-md" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-control nzErrorTip="Please input your nickname!">
@@ -30,5 +31,6 @@
   </nz-form-item>
   <button nz-button nzType="primary">Register</button>
   <span class="text-white mx-2">or</span>
-  <a class="text-blue-100 login-link" (click)="onLoginClick()">Log in</a>
+  <span class="text-blue-100 login-link cursor-pointer" (click)="onLoginClick()">Log in</span>
+  <app-error-alert [message]="errorMessage()"></app-error-alert>
 </form>

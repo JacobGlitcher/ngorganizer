@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   AbstractControl,
   NonNullableFormBuilder,
@@ -8,17 +8,25 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ErrorAlertComponent } from '../../components/error-alert/error-alert.component'; // Adjust path
 
 @Component({
   standalone: true,
   selector: 'app-register',
-  imports: [ReactiveFormsModule, NzButtonModule, NzCheckboxModule, NzFormModule, NzInputModule, NzSelectModule],
+  imports: [
+    ReactiveFormsModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule,
+    ErrorAlertComponent
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -33,6 +41,8 @@ export class RegisterComponent implements OnInit {
     checkPassword: this.fb.control('', [Validators.required, this.confirmationValidator]),
   });
 
+  errorMessage = signal<string | null>(null);
+
   ngOnInit() {
     this.validateForm.controls.checkPassword.setValidators([
       Validators.required,
@@ -42,18 +52,18 @@ export class RegisterComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      const { username, password } = this.validateForm.value
+      const { username, password } = this.validateForm.value;
       if (this.userService.register(username!, password!)) {
-        console.log('Registration successful')
-        this.router.navigate(['/login'])
+        this.errorMessage.set(null);
+        this.router.navigate(['/login']);
       } else {
-        console.log('Username already exists')
+        this.errorMessage.set('Username already exists');
       }
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
-          control.markAsDirty()
-          control.updateValueAndValidity({ onlySelf: true })
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
@@ -61,14 +71,14 @@ export class RegisterComponent implements OnInit {
 
   confirmationValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value) {
-      return { required: true }
+      return { required: true };
     } else if (control.value !== this.validateForm.controls.password.value) {
-      return { confirm: true, error: true }
+      return { confirm: true, error: true };
     }
-    return {}
+    return {};
   }
 
   onLoginClick() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 }

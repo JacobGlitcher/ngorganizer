@@ -1,0 +1,19 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .nav-menu {
+
+  }
+
+  p {
+    color: white;
+  }
+}
+
+nz-menu-item {
+  color: white;
+  &:hover {
+    background: #1890ff;
+  }
+}

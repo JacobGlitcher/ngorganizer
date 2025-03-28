@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, inject} from '@angular/core'
+import { Router } from '@angular/router'
+
+import { UserService } from '../../services/user.service'
 
 @Component({
   standalone: true,
@@ -11,7 +13,9 @@ import { Router } from '@angular/router';
 export class StarterComponent {
   constructor(private router: Router) {}
 
+  userService = inject(UserService)
+
   onLoginClick() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'])
   }
 }

@@ -3,9 +3,12 @@
     <p class="text-white text-3xl cursor-pointer" (click)="onHomeClick()">NG Organizer</p>
 
     <ul class="flex items-center text-white text-xl">
-      @if(!isLoginOrRegisterPage) {
+      @if(!isLoginOrRegisterPage && !userService.isLoggedIn()) {
         <li class="mr-4 cursor-pointer" (click)="onLoginClick()">Login</li>
         <li class="cursor-pointer" (click)="onRegisterClick()">Register</li>
+      } @else if (userService.isLoggedIn()) {
+        <li class="cursor-pointer mr-4" (click)="onOrganizerClick()">Organizer</li>
+        <li class="cursor-pointer" (click)="onLogout()"> Logout</li>
       }
     </ul>
   </div>

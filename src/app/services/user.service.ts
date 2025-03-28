@@ -1,6 +1,5 @@
-// src/app/services/user.service.ts
-import { Injectable } from '@angular/core';
-import CryptoJS from 'crypto-js';
+import { Injectable, signal, computed } from '@angular/core'
+import CryptoJS from 'crypto-js'
 
 interface User {
   username: string;
@@ -11,49 +10,49 @@ interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private usersKey = 'users';
-  private activeUserKey = 'activeUser';
+  private usersKey = 'users'
+  private activeUserKey = 'activeUser'
+  private activeUser = signal<string | null>(localStorage.getItem(this.activeUserKey))
+  isLoggedIn = computed(() => !!this.activeUser())
 
   private getUsers(): User[] {
-    const usersJson = localStorage.getItem(this.usersKey);
-    return usersJson ? JSON.parse(usersJson) : [];
+    const usersJson = localStorage.getItem(this.usersKey)
+    return usersJson ? JSON.parse(usersJson) : []
   }
 
   private saveUsers(users: User[]): void {
-    localStorage.setItem(this.usersKey, JSON.stringify(users));
+    localStorage.setItem(this.usersKey, JSON.stringify(users))
   }
 
   register(username: string, password: string): boolean {
-    const users = this.getUsers();
+    const users = this.getUsers()
     if (users.some(user => user.username === username)) {
-      return false; // Username already exists
+      return false
     }
-    const passwordHash = CryptoJS.SHA256(password).toString();
-    users.push({ username, passwordHash });
-    this.saveUsers(users);
+    const passwordHash = CryptoJS.SHA256(password).toString()
+    users.push({ username, passwordHash })
+    this.saveUsers(users)
     return true;
   }
 
   login(username: string, password: string): boolean {
-    const users = this.getUsers();
-    const passwordHash = CryptoJS.SHA256(password).toString();
-    const user = users.find(user => user.username === username && user.passwordHash === passwordHash);
+    const users = this.getUsers()
+    const passwordHash = CryptoJS.SHA256(password).toString()
+    const user = users.find(user => user.username === username && user.passwordHash === passwordHash)
     if (user) {
-      localStorage.setItem(this.activeUserKey, username);
-      return true;
+      localStorage.setItem(this.activeUserKey, username)
+      this.activeUser.set(username)
+      return true
     }
-    return false;
+    return false
   }
 
   logout(): void {
-    localStorage.removeItem(this.activeUserKey);
+    localStorage.removeItem(this.activeUserKey)
+    this.activeUser.set(null)
   }
 
   getActiveUser(): string | null {
-    return localStorage.getItem(this.activeUserKey);
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.getActiveUser();
+    return this.activeUser()
   }
 }

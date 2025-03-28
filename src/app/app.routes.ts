@@ -6,11 +6,14 @@ import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
 import { OrganizerComponent } from './pages/organizer/organizer.component'
 
+import { authGuard } from './guards/auth.guard'
+import { noAuthGuard } from './guards/no-auth.guard'
+
 export const routes: Routes = [
   { path: '', component: StarterComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'organizer', component: OrganizerComponent },
+  { path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [noAuthGuard] },
+  { path: 'organizer', component: OrganizerComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];
 

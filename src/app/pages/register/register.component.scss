@@ -3,13 +3,17 @@
   min-width: 250px;
 }
 
+.register-area {
+  margin-bottom: 8px;
+}
+
 .ant-form {
   padding: 2rem;
   .ant-form-item {
     margin-bottom: 2rem;
   }
 
-  .register-link {
+  .login-link {
     color: #dbeafe;
   }
 }

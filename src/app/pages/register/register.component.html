@@ -1,0 +1,34 @@
+<form nz-form [formGroup]="validateForm" class="login-form bg-blue-950 rounded-md" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your nickname!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" id="nickname" nz-input formControlName="username" placeholder="Username" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your password!">
+      <nz-input-group nzPrefixIcon="lock">
+        <input nz-input type="password" formControlName="password" id="password" placeholder="Password" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <nz-input-group nzPrefixIcon="check">
+        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Confirm Password" />
+      </nz-input-group>
+      <ng-template #errorTpl let-control>
+        @if (control.errors?.['required']) {
+          Please confirm your password!
+        }
+        @if (control.errors?.['confirm']) {
+          Two passwords that you enter is inconsistent!
+        }
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <button nz-button nzType="primary">Register</button>
+  <span class="text-white mx-2">or</span>
+  <a class="text-blue-100 login-link" (click)="onLoginClick()">Log in</a>
+</form>

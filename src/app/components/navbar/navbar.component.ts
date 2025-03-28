@@ -20,6 +20,14 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
+  onRegisterClick() {
+    this.router.navigate(['/register']);
+  }
+
+  onHomeClick() {
+    this.router.navigate(['/']);
+  }
+
   get isLoginOrRegisterPage(): boolean {
     return this.router.url === '/login' || this.router.url === '/register';
   }

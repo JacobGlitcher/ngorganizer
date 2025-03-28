@@ -1,12 +1,12 @@
 <header class="px-5 py-6 bg-blue-950">
   <div class="flex justify-between">
-    <p class="text-white text-3xl">NG Organizer</p>
+    <p class="text-white text-3xl cursor-pointer" (click)="onHomeClick()">NG Organizer</p>
 
-    @if(!isLoginOrRegisterPage) {
-      <ul class="flex items-center text-white text-xl">
+    <ul class="flex items-center text-white text-xl">
+      @if(!isLoginOrRegisterPage) {
         <li class="mr-4 cursor-pointer" (click)="onLoginClick()">Login</li>
-        <li class="cursor-pointer">Logout</li>
-      </ul>
-    }
+        <li class="cursor-pointer" (click)="onRegisterClick()">Register</li>
+      }
+    </ul>
   </div>
 </header>

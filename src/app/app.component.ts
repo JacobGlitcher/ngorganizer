@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { StarterComponent } from './pages/starter/starter.component';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [
     RouterOutlet,
     NzLayoutModule,
-    NavbarComponent
+    NavbarComponent,
+    StarterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

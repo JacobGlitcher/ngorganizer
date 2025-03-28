@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { StarterComponent } from './pages/starter/starter.component';
+
 export const routes: Routes = [
-  // { path: '', redirectTo: '/login', pathMatch: 'full' },
-  // { path: 'login', component: null },
-  // { path: 'todos', component: null },
+  { path: '', component: StarterComponent },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Injectable, signal, computed } from '@angular/core';
-import CryptoJS from 'crypto-js';
+import { SHA256 } from 'crypto-js';
 
 interface User {
   username: string;
@@ -29,7 +29,7 @@ export class UserService {
     if (users.some((user) => user.username === username)) {
       return false;
     }
-    const passwordHash = CryptoJS.SHA256(password).toString(); // using CryptoJS to hash the password
+    const passwordHash = SHA256(password).toString(); // using CryptoJS to hash the password
     users.push({ username, passwordHash });
     this.saveUsers(users);
     return true;
@@ -37,7 +37,7 @@ export class UserService {
 
   login(username: string, password: string): boolean {
     const users = this.getUsers();
-    const passwordHash = CryptoJS.SHA256(password).toString(); // using CryptoJS to hash and compare the password
+    const passwordHash = SHA256(password).toString(); // using CryptoJS to hash and compare the password
     const user = users.find(
       (user) => user.username === username && user.passwordHash === passwordHash
     );

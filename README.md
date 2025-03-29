@@ -1,59 +1,66 @@
-# Ngorganizer
+# Angular 19 Test Task
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+This project is a test task built with Angular 19 to demonstrate various features, tools, and functionalities. Below is an overview of the implementation, features, and tools used in this project.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Tailwind CSS and Zorro:** Integrated Tailwind CSS for utility-first styling and Ng-Zorro (Ant Design for Angular) for pre-built UI components.
+- **Authentication Pages:** Added Login and Register pages for user authentication.
+- **Credential Storage:**
+  - User credentials and active session data are stored in localStorage and sessionStorage.
+  - **localStorage:** Persists registration data even after the browser is closed.
+  - **sessionStorage:** Stores active session data, which is cleared when the window is closed.
+- **Credential Security:** Implemented hashing for securely storing user credentials.
+- **Routing Guards:** Added guards to protect protected routes, ensuring only authenticated users can access them.
+- **Form Validation:** Included basic validation for forms on the login and register pages.
+- **Error Handling:** Displayed error messages on the login and register pages for better user feedback(to activate try to register if already registered).
+- **Todo Page with CRUD:**
+  - Built a fully functional Todo page with Create, Read, Update, and Delete (CRUD) operations.
+  - Used JSONBin as a mock database for storing and retrieving todo data.
+- State Management & Reactivity:
+  - Utilized Signals, Observables, and NGXS to demonstrate different approaches to state management and reactivity in Angular.
+- **Todo Functionality:**
+  - Added features like add todo, delete todo, update todo, sort by name, and pagination for the todo list.
+- **Responsive Design:** Ensured the application is responsive across different screen sizes.
+- **Code Quality:**
+  - Integrated ESLint for linting and Prettier for code formatting to maintain consistency and quality.
+  - Added comments throughout the codebase for better readability and maintainability.
+- **Deployment:** Deployed the application to Vercel for hosting.
+
+## Tech Stack
+
+- **Angular 19:** Core framework for building the application.
+- **Tailwind CSS:** Utility-first CSS framework for styling.
+- **Ng-Zorro:** UI component library for Angular.
+- **JSONBin:** Mock database for the todo feature.
+- **NGXS:** State management library.
+- **ESLint** & Prettier: Tools for code quality and formatting.
+- **Vercel:** Hosting platform for deployment.
+
+## Setup Instructions
+
+**Install Dependencies:**
+
+```bash
+npm install
+```
+
+**Run the Application:**
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+then: Open your browser and navigate to http://localhost:4200.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+**Build for Production:**
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Notes
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- The project showcases a mix of modern Angular features (Signals, Observables) alongside state management with NGXS.
+- Comments are added throughout the code to explain key implementation details.
+- The application is deployed to Vercel, and the live URL can be shared upon request.

@@ -1,11 +1,11 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store'
-import { tap } from 'rxjs/operators'
-import { Injectable } from '@angular/core'
-import { v4 as uuidv4 } from 'uuid'
+import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 
-import { Todo } from '../../models/todo.model'
-import { AddTodo, LoadTodos, DeleteTodo, UpdateCompletionTodo, FilterTodos } from './todo.actions'
-import { TodoService } from '../../services/todo.service'
+import { Todo } from '../../models/todo.model';
+import { AddTodo, LoadTodos, DeleteTodo, UpdateCompletionTodo, FilterTodos } from './todo.actions';
+import { TodoService } from '../../services/todo.service';
 
 export interface TodoStateModel {
   todos: Todo[];
@@ -25,9 +25,9 @@ export class TodoState {
 
   @Selector()
   static getTodos(state: TodoStateModel): Todo[] {
-    const todos = state.filteredTodos.length ? state.filteredTodos : state.todos
+    const todos = state.filteredTodos.length ? state.filteredTodos : state.todos;
 
-    return todos.sort((a: Todo, b: Todo) => Number(a.isCompleted) - Number(b.isCompleted))
+    return todos.sort((a: Todo, b: Todo) => Number(a.isCompleted) - Number(b.isCompleted));
   }
 
   @Selector()
@@ -37,13 +37,13 @@ export class TodoState {
 
   @Selector()
   static getPageSize(state: TodoStateModel): number {
-    return this.getTodos(state).length
+    return this.getTodos(state).length;
   }
 
   @Action(LoadTodos)
   loadTodos(ctx: StateContext<TodoStateModel>) {
     return this.todoService.getTodos().pipe(
-      tap(todos => {
+      tap((todos) => {
         ctx.patchState({ todos });
       })
     );
@@ -70,7 +70,7 @@ export class TodoState {
   @Action(UpdateCompletionTodo)
   updateCompletionTodo(ctx: StateContext<TodoStateModel>, action: UpdateCompletionTodo) {
     const state = ctx.getState();
-    const updatedTodos = state.todos.map(todo => {
+    const updatedTodos = state.todos.map((todo) => {
       if (todo.id === action.id) {
         return {
           ...todo,
@@ -78,7 +78,7 @@ export class TodoState {
         };
       }
       return todo;
-    })
+    });
 
     ctx.patchState({ todos: updatedTodos });
 
@@ -88,7 +88,7 @@ export class TodoState {
   @Action(DeleteTodo)
   deleteTodo(ctx: StateContext<TodoStateModel>, action: DeleteTodo) {
     const state = ctx.getState();
-    const updatedTodos = state.todos.filter(todo => todo.id !== action.id);
+    const updatedTodos = state.todos.filter((todo) => todo.id !== action.id);
 
     ctx.patchState({ todos: updatedTodos });
 
@@ -104,7 +104,7 @@ export class TodoState {
       return;
     }
 
-    const updatedTodos = state.todos.filter(todo =>
+    const updatedTodos = state.todos.filter((todo) =>
       todo.name.toLowerCase().includes(action.searchTerm.toLowerCase())
     );
 

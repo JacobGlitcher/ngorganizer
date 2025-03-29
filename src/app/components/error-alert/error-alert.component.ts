@@ -7,15 +7,10 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
   imports: [NzAlertModule],
   template: `
     @if (message) {
-      <nz-alert
-        nzType="error"
-        [nzMessage]="message"
-        nzShowIcon
-        class="mt-2"
-      ></nz-alert>
+      <nz-alert nzType="error" [nzMessage]="message" nzShowIcon class="mt-2"></nz-alert>
     }
   `,
-  styles: []
+  styles: [],
 })
 export class ErrorAlertComponent {
   @Input() message: string | null = null;

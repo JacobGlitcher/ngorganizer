@@ -1,13 +1,16 @@
 <div class="starter">
   <div>
     <h1 class="text-2xl sm:text-3xl text-center">
-      Welcome to <span class="bg-blue-950 rounded-md p-2 text-white">NG Organizer</span>
+      Welcome to
+      <span class="bg-blue-950 rounded-md p-2 text-white">NG Organizer</span>
     </h1>
     <p class="starter-alert text-center text-base sm:text-xl font-semibold max-w-[30rem]">
       @if (userService.isLoggedIn()) {
-        Hello {{userService.getActiveUser()}}. Please go to Organizer section to proceed with ToDos
+        Hello {{ userService.getActiveUser() }}. Please go to Organizer section to proceed with
+        ToDos
       } @else {
-        To proceed, please <span class="font-bold cursor-pointer" (click)="onLoginClick()">log in</span>
+        To proceed, please
+        <span class="font-bold cursor-pointer" (click)="onLoginClick()">log in</span>
       }
     </p>
   </div>

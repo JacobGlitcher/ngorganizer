@@ -4,7 +4,7 @@ import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
   ValidationErrors,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -25,10 +25,10 @@ import { ErrorAlertComponent } from '../../components/error-alert/error-alert.co
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    ErrorAlertComponent
+    ErrorAlertComponent,
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnInit {
   private fb = inject(NonNullableFormBuilder);
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.validateForm.controls.checkPassword.setValidators([
       Validators.required,
-      this.confirmationValidator.bind(this)
+      this.confirmationValidator.bind(this),
     ]);
   }
 
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
         this.errorMessage.set('Username already exists');
       }
     } else {
-      Object.values(this.validateForm.controls).forEach(control => {
+      Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });

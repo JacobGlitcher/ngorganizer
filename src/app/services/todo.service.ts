@@ -9,7 +9,8 @@ import { Todo } from '../models/todo.model';
 })
 export class TodoService {
   private apiUrl = 'https://api.jsonbin.io/v3/b/67e6d3308561e97a50f4afd3';
-  private masterKey = '$2a$10$P3z4Of4OloaLiYeNtRVSwu663226y1A8F0VKaMw5qegeV6N0L1vUa';
+  private masterKey =
+    '$2a$10$P3z4Of4OloaLiYeNtRVSwu663226y1A8F0VKaMw5qegeV6N0L1vUa';
   // private apiUrl = 'https://api.jsonbin.io/v3/b/670f4afd3';
   // private masterKey = '$2a$10$P3z4Of4OloaLiYeNtRVSwu1vUa';
 
@@ -23,12 +24,18 @@ export class TodoService {
   }
 
   getTodos(): Observable<Todo[]> {
-    return this.http.get<{ record: { todos: Todo[] } }>(this.apiUrl, { headers: this.getHeaders() }).pipe(
-      map(response => response.record.todos || [])
-    );
+    return this.http
+      .get<{
+        record: { todos: Todo[] };
+      }>(this.apiUrl, { headers: this.getHeaders() })
+      .pipe(map((response) => response.record.todos || []));
   }
 
-  updateTodos(todos: Todo[]): Observable<any> {
-    return this.http.put(this.apiUrl, { todos }, { headers: this.getHeaders() });
+  updateTodos(todos: Todo[]): Observable<object> {
+    return this.http.put(
+      this.apiUrl,
+      { todos },
+      { headers: this.getHeaders() }
+    );
   }
 }

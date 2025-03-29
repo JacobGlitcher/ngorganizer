@@ -23,6 +23,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FormsModule),
     provideAnimationsAsync(),
     provideHttpClient(),
-    provideStore([TodoState], withNgxsLoggerPlugin(), withNgxsReduxDevtoolsPlugin())
-  ]
+    provideStore([TodoState], withNgxsLoggerPlugin(), withNgxsReduxDevtoolsPlugin()),
+  ],
 };

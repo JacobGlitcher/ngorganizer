@@ -23,9 +23,7 @@
   <div class="task-container">
     @if (allTodos$ | async; as todos) {
       @if (!todos.length) {
-        <div class="text-blue-100 text-center">
-          No tasks yet. Add some tasks to get started!
-        </div>
+        <div class="text-blue-100 text-center">No tasks yet. Add some tasks to get started!</div>
       } @else {
         <nz-pagination
           class="task-pagination bg-white rounded"
@@ -50,24 +48,29 @@
           />
         </nz-input-group>
 
-        @if (!((filteredTodos$ | async)?.length) && searchTerm) {
-          <div class="text-white">
-            No tasks with this term
-          </div>
+        @if (!(filteredTodos$ | async)?.length && searchTerm) {
+          <div class="text-white">No tasks with this term</div>
         } @else {
           <ul class="todo-list">
             @let sliceActiveTodos = todos.slice(pageSize * pageIndex - 5, pageSize * pageIndex);
             @for (todo of sliceActiveTodos; track todo.id) {
               <li class="todo-item cursor-pointer" (click)="onTaskCompletionUpdate(todo.id)">
-                <span class="text-base select-none break-words full-width pr-2 break-all" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
+                <span
+                  class="text-base select-none break-words full-width pr-2 break-all"
+                  [class.completed]="todo.isCompleted"
+                  >{{ todo.name }}</span
+                >
                 <span class="delete-button">
-                <nz-icon class="text-base cursor-pointer" nzType="close" nzTheme="outline" (click)="onTaskDelete(todo.id)" />
-              </span>
+                  <nz-icon
+                    class="text-base cursor-pointer"
+                    nzType="close"
+                    nzTheme="outline"
+                    (click)="onTaskDelete(todo.id)"
+                  />
+                </span>
               </li>
             } @empty {
-              <div class="text-white">
-                No active tasks {{ searchTerm && 'with this term' }}
-              </div>
+              <div class="text-white">No active tasks {{ searchTerm && 'with this term' }}</div>
             }
           </ul>
         }

@@ -1,22 +1,45 @@
-<form nz-form [formGroup]="validateForm" class="login-form bg-blue-950 rounded-md" (ngSubmit)="submitForm()">
+<form
+  nz-form
+  [formGroup]="validateForm"
+  class="login-form bg-blue-950 rounded-md"
+  (ngSubmit)="submitForm()"
+>
   <nz-form-item>
     <nz-form-control nzErrorTip="Please input your nickname!">
       <nz-input-group nzPrefixIcon="user">
-        <input type="text" id="nickname" nz-input formControlName="username" placeholder="Username" />
+        <input
+          type="text"
+          id="nickname"
+          nz-input
+          formControlName="username"
+          placeholder="Username"
+        />
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control nzErrorTip="Please input your password!">
       <nz-input-group nzPrefixIcon="lock">
-        <input nz-input type="password" formControlName="password" id="password" placeholder="Password" />
+        <input
+          nz-input
+          type="password"
+          formControlName="password"
+          id="password"
+          placeholder="Password"
+        />
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzErrorTip]="errorTpl">
       <nz-input-group nzPrefixIcon="check">
-        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Confirm Password" />
+        <input
+          nz-input
+          type="password"
+          formControlName="checkPassword"
+          id="checkPassword"
+          placeholder="Confirm Password"
+        />
       </nz-input-group>
       <ng-template #errorTpl let-control>
         @if (control.errors?.['required']) {

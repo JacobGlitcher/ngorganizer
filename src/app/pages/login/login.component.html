@@ -1,4 +1,9 @@
-<form nz-form [formGroup]="validateForm" class="login-form bg-blue-950 rounded-md" (ngSubmit)="submitForm()">
+<form
+  nz-form
+  [formGroup]="validateForm"
+  class="login-form bg-blue-950 rounded-md"
+  (ngSubmit)="submitForm()"
+>
   <nz-form-item>
     <nz-form-control nzErrorTip="Please input your username!">
       <nz-input-group nzPrefixIcon="user">
@@ -15,6 +20,8 @@
   </nz-form-item>
   <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
   <span class="text-white mx-2">or</span>
-  <span class="text-blue-100 register-link cursor-pointer" (click)="onRegisterClick()">Register now!</span>
+  <span class="text-blue-100 register-link cursor-pointer" (click)="onRegisterClick()"
+    >Register now!</span
+  >
   <app-error-alert [message]="errorMessage()"></app-error-alert>
 </form>

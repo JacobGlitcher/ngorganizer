@@ -7,7 +7,7 @@ import {
   LoadTodos,
   DeleteTodo,
   UpdateCompletionTodo,
-  FilterTodos
+  FilterTodos,
 } from '../../store/todo/todo.actions';
 import { TodoState } from '../../store/todo/todo.state';
 import { FormsModule } from '@angular/forms';
@@ -28,16 +28,16 @@ import { CommonModule } from '@angular/common';
     NzInputModule,
     NzButtonModule,
     NzIconModule,
-    NzPaginationModule
+    NzPaginationModule,
   ],
   templateUrl: './organizer.component.html',
-  styleUrl: './organizer.component.scss'
+  styleUrl: './organizer.component.scss',
 })
 export class OrganizerComponent implements OnInit {
-  taskName: string = '';
-  searchTerm: string = '';
-  pageIndex: number = 1;
-  pageSize: number = 5;
+  taskName = '';
+  searchTerm = '';
+  pageIndex = 1;
+  pageSize = 5;
 
   allTodos$: Observable<Todo[]>;
   filteredTodos$: Observable<Todo[]>;
@@ -50,25 +50,25 @@ export class OrganizerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadTodos())
+    this.store.dispatch(new LoadTodos());
   }
 
   addTask(): void {
     if (this.taskName.trim()) {
       this.store.dispatch(new AddTodo(this.taskName));
       this.taskName = ' ';
-      this.onTaskSearching()
+      this.onTaskSearching();
     }
   }
 
   onTaskDelete(id: string): void {
-    this.store.dispatch(new DeleteTodo(id))
-    this.onTaskSearching()
+    this.store.dispatch(new DeleteTodo(id));
+    this.onTaskSearching();
   }
 
   onTaskCompletionUpdate(id: string): void {
-    this.store.dispatch(new UpdateCompletionTodo(id))
-    this.onTaskSearching()
+    this.store.dispatch(new UpdateCompletionTodo(id));
+    this.onTaskSearching();
   }
 
   onTaskSearching(): void {

@@ -1,10 +1,11 @@
-@use "tailwindcss";
+@use 'tailwindcss';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-p, ul {
+p,
+ul {
   margin: 0;
   padding: 0;
 }

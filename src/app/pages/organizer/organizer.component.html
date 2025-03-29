@@ -59,7 +59,7 @@
             @let sliceActiveTodos = todos.slice(pageSize * pageIndex - 5, pageSize * pageIndex);
             @for (todo of sliceActiveTodos; track todo.id) {
               <li class="todo-item cursor-pointer" (click)="onTaskCompletionUpdate(todo.id)">
-                <span class="text-base select-none" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
+                <span class="text-base select-none break-words full-width pr-2 break-all" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
                 <span class="delete-button">
                 <nz-icon class="text-base cursor-pointer" nzType="close" nzTheme="outline" (click)="onTaskDelete(todo.id)" />
               </span>

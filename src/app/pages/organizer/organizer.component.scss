@@ -1,5 +1,6 @@
 .organizer-form {
   min-width: 250px;
+  max-width: 350px;
   .organizer-title {
     margin-bottom: 1rem;
   }
@@ -36,10 +37,15 @@
       margin-left: auto;
     }
   }
+
+  #organizer-input {
+    padding-right: .5rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .organizer-form {
     min-width: 400px;
+    max-width: 400px;
   }
 }

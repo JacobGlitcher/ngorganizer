@@ -12,7 +12,7 @@ interface User {
 export class UserService {
   private usersKey = 'users'
   private activeUserKey = 'activeUser'
-  private activeUser = signal<string | null>(localStorage.getItem(this.activeUserKey))
+  private activeUser = signal<string | null>(sessionStorage.getItem(this.activeUserKey))
   isLoggedIn = computed(() => !!this.activeUser())
 
   private getUsers(): User[] {
@@ -40,7 +40,7 @@ export class UserService {
     const passwordHash = CryptoJS.SHA256(password).toString()
     const user = users.find(user => user.username === username && user.passwordHash === passwordHash)
     if (user) {
-      localStorage.setItem(this.activeUserKey, username)
+      sessionStorage.setItem(this.activeUserKey, username)
       this.activeUser.set(username)
       return true
     }
@@ -48,7 +48,7 @@ export class UserService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.activeUserKey)
+    sessionStorage.removeItem(this.activeUserKey)
     this.activeUser.set(null)
   }
 

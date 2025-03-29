@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo.model';
-import { AddTodo, LoadTodos, DeleteTodo } from '../../store/todo/todo.actions';
+import {
+  AddTodo,
+  LoadTodos,
+  DeleteTodo,
+  UpdateCompletionTodo
+} from '../../store/todo/todo.actions';
 import { TodoState } from '../../store/todo/todo.state';
 import { FormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -46,5 +51,9 @@ export class OrganizerComponent implements OnInit {
 
   onTaskDelete(id: string): void {
     this.store.dispatch(new DeleteTodo(id))
+  }
+
+  onTaskCompletionUpdate(id: string): void {
+    this.store.dispatch(new UpdateCompletionTodo(id))
   }
 }

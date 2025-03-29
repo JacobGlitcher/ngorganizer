@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Todo } from '../../models/todo.model'
-import { AddTodo, LoadTodos, DeleteTodo } from './todo.actions'
+import { AddTodo, LoadTodos, DeleteTodo, UpdateCompletionTodo } from './todo.actions'
 import { TodoService } from '../../services/todo.service'
 
 
@@ -48,6 +48,24 @@ export class TodoState {
     };
 
     const updatedTodos = [...state.todos, newTodo];
+
+    ctx.patchState({ todos: updatedTodos });
+
+    return this.todoService.updateTodos(updatedTodos);
+  }
+
+  @Action(UpdateCompletionTodo)
+  updateCompletionTodo(ctx: StateContext<TodoStateModel>, action: UpdateCompletionTodo) {
+    const state = ctx.getState();
+    const updatedTodos = state.todos.map(todo => {
+      if (todo.id === action.id) {
+        return {
+          ...todo,
+          isCompleted: !todo.isCompleted,
+        };
+      }
+      return todo;
+    })
 
     ctx.patchState({ todos: updatedTodos });
 

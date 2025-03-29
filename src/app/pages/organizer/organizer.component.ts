@@ -15,6 +15,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -26,7 +27,8 @@ import { CommonModule } from '@angular/common';
     NzFormModule,
     NzInputModule,
     NzButtonModule,
-    NzIconModule
+    NzIconModule,
+    NzPaginationModule
   ],
   templateUrl: './organizer.component.html',
   styleUrl: './organizer.component.scss'
@@ -34,16 +36,17 @@ import { CommonModule } from '@angular/common';
 export class OrganizerComponent implements OnInit {
   taskName: string = '';
   searchTerm: string = '';
+  pageIndex: number = 1;
+  pageSize: number = 5;
+
   allTodos$: Observable<Todo[]>;
   filteredTodos$: Observable<Todo[]>;
-  activeTodos$: Observable<Todo[]>;
-  completedTodos$: Observable<Todo[]>;
+  paginationTotal$: Observable<number>;
 
   constructor(private store: Store) {
     this.allTodos$ = this.store.select(TodoState.getTodos);
     this.filteredTodos$ = this.store.select(TodoState.getOnlyFilteredTodos);
-    this.activeTodos$ = this.store.select(TodoState.getActiveTodos);
-    this.completedTodos$ = this.store.select(TodoState.getCompletedTodos);
+    this.paginationTotal$ = this.store.select(TodoState.getPageSize);
   }
 
   ngOnInit(): void {
@@ -70,5 +73,11 @@ export class OrganizerComponent implements OnInit {
 
   onTaskSearching(): void {
     this.store.dispatch(new FilterTodos(this.searchTerm.trim()));
+  }
+
+  onPageIndexChange(pageIndex: number): void {
+    this.pageIndex = pageIndex;
+
+    this.onTaskSearching();
   }
 }

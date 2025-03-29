@@ -25,7 +25,9 @@ export class TodoState {
 
   @Selector()
   static getTodos(state: TodoStateModel): Todo[] {
-    return state.filteredTodos.length ? state.filteredTodos : state.todos;
+    const todos = state.filteredTodos.length ? state.filteredTodos : state.todos
+
+    return todos.sort((a: Todo, b: Todo) => Number(a.isCompleted) - Number(b.isCompleted))
   }
 
   @Selector()
@@ -34,13 +36,8 @@ export class TodoState {
   }
 
   @Selector()
-  static getActiveTodos(state: TodoStateModel): Todo[] {
-    return this.getTodos(state).filter(todo => !todo.isCompleted)
-  }
-
-  @Selector()
-  static getCompletedTodos(state: TodoStateModel): Todo[] {
-    return this.getTodos(state).filter(todo => todo.isCompleted)
+  static getPageSize(state: TodoStateModel): number {
+    return this.getTodos(state).length
   }
 
   @Action(LoadTodos)

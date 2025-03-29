@@ -27,40 +27,58 @@
           No tasks yet. Add some tasks to get started!
         </div>
       } @else {
-        @if (activeTodos$ | async; as activeTodos) {
-          <div class="text-blue-100 text-lg">Active tasks</div>
-          <ul class="todo-list">
-            @for (todo of activeTodos; track todo.id) {
-              <li class="todo-item cursor-pointer" (click)="onTaskCompletionUpdate(todo.id)">
-                <span class="text-base" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
-                <span class="delete-button">
-                <nz-icon class="text-base cursor-pointer" nzType="close" nzTheme="outline" (click)="onTaskDelete(todo.id)" />
-              </span>
-              </li>
-            } @empty {
-              <div class="text-white">
-                No active tasks. All are completed
-              </div>
-            }
-          </ul>
-        }
+        <nz-input-group nzPrefixIcon="search">
+          <input
+            nz-input
+            type="text"
+            id="organizer-search-input"
+            placeholder="Search tasks by name"
+            [(ngModel)]="searchTerm"
+            (input)="onTaskSearching()"
+            required
+          />
+        </nz-input-group>
 
-        @if (completedTodos$ | async; as completedTodos) {
-          <div class="text-blue-100 text-lg">Completed tasks</div>
-          <ul class="todo-list">
-            @for (todo of completedTodos; track todo.id) {
-              <li class="todo-item cursor-pointer" (click)="onTaskCompletionUpdate(todo.id)">
-                <span class="text-base" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
-                <span class="delete-button">
+        @if (!((filteredTodos$ | async)?.length) && searchTerm) {
+          <div class="text-white">
+            No tasks with this term
+          </div>
+        } @else {
+          @if (activeTodos$ | async; as activeTodos) {
+            <div class="text-blue-100 text-lg">Active tasks</div>
+            <ul class="todo-list">
+              @for (todo of activeTodos; track todo.id) {
+                <li class="todo-item cursor-pointer" (click)="onTaskCompletionUpdate(todo.id)">
+                  <span class="text-base" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
+                  <span class="delete-button">
                 <nz-icon class="text-base cursor-pointer" nzType="close" nzTheme="outline" (click)="onTaskDelete(todo.id)" />
               </span>
-              </li>
-            } @empty {
-              <div class="text-white max-w-[22rem]">
-                No completed tasks. Click on a task name to mark it as completed
-              </div>
-            }
-          </ul>
+                </li>
+              } @empty {
+                <div class="text-white">
+                  No active tasks {{ searchTerm && 'with this term' }}
+                </div>
+              }
+            </ul>
+          }
+
+          @if (completedTodos$ | async; as completedTodos) {
+            <div class="text-blue-100 text-lg">Completed tasks</div>
+            <ul class="todo-list">
+              @for (todo of completedTodos; track todo.id) {
+                <li class="todo-item cursor-pointer" (click)="onTaskCompletionUpdate(todo.id)">
+                  <span class="text-base" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
+                  <span class="delete-button">
+                <nz-icon class="text-base cursor-pointer" nzType="close" nzTheme="outline" (click)="onTaskDelete(todo.id)" />
+              </span>
+                </li>
+              } @empty {
+                <div class="text-white max-w-[22rem]">
+                  No completed tasks {{ searchTerm && 'with this term' }}
+                </div>
+              }
+            </ul>
+          }
         }
       }
     }

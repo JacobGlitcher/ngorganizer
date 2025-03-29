@@ -26,9 +26,10 @@
     color: #999;
   }
 
-  .created-at {
-    font-size: 0.8em;
-    color: #bbb;
+  .task-container {
+    .ant-input-affix-wrapper {
+      margin: 1rem 0;
+    }
   }
 }
 

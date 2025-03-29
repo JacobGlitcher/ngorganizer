@@ -16,3 +16,8 @@ export class DeleteTodo {
   static readonly type = '[Todo] Delete'
   constructor(public id: string) {}
 }
+
+export class FilterTodos {
+  static readonly type = '[Todo] Filter'
+  constructor(public searchTerm: string) {}
+}

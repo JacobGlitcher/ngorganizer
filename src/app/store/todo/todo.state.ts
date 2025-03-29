@@ -4,18 +4,19 @@ import { Injectable } from '@angular/core'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Todo } from '../../models/todo.model'
-import { AddTodo, LoadTodos, DeleteTodo, UpdateCompletionTodo } from './todo.actions'
+import { AddTodo, LoadTodos, DeleteTodo, UpdateCompletionTodo, FilterTodos } from './todo.actions'
 import { TodoService } from '../../services/todo.service'
-
 
 export interface TodoStateModel {
   todos: Todo[];
+  filteredTodos: Todo[];
 }
 
 @State<TodoStateModel>({
   name: 'todos',
   defaults: {
     todos: [],
+    filteredTodos: [],
   },
 })
 @Injectable()
@@ -24,17 +25,22 @@ export class TodoState {
 
   @Selector()
   static getTodos(state: TodoStateModel): Todo[] {
-    return state.todos;
+    return state.filteredTodos.length ? state.filteredTodos : state.todos;
+  }
+
+  @Selector()
+  static getOnlyFilteredTodos(state: TodoStateModel): Todo[] {
+    return state.filteredTodos;
   }
 
   @Selector()
   static getActiveTodos(state: TodoStateModel): Todo[] {
-    return state.todos.filter(todo => !todo.isCompleted)
+    return this.getTodos(state).filter(todo => !todo.isCompleted)
   }
 
   @Selector()
   static getCompletedTodos(state: TodoStateModel): Todo[] {
-    return state.todos.filter(todo => todo.isCompleted)
+    return this.getTodos(state).filter(todo => todo.isCompleted)
   }
 
   @Action(LoadTodos)
@@ -90,5 +96,21 @@ export class TodoState {
     ctx.patchState({ todos: updatedTodos });
 
     return this.todoService.updateTodos(updatedTodos);
+  }
+
+  @Action(FilterTodos)
+  filterTodos(ctx: StateContext<TodoStateModel>, action: FilterTodos) {
+    const state = ctx.getState();
+
+    if (!action.searchTerm) {
+      ctx.patchState({ filteredTodos: [] });
+      return;
+    }
+
+    const updatedTodos = state.todos.filter(todo =>
+      todo.name.toLowerCase().includes(action.searchTerm.toLowerCase())
+    );
+
+    ctx.patchState({ filteredTodos: updatedTodos });
   }
 }

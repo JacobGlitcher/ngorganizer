@@ -30,7 +30,10 @@
         <ul class="todo-list">
           @for (todo of todos; track todo.id) {
             <li class="todo-item">
-              <span [class.completed]="todo.isCompleted">{{ todo.name }}</span>
+              <span class="text-base" [class.completed]="todo.isCompleted">{{ todo.name }}</span>
+              <span class="delete-button">
+                <nz-icon class="text-base cursor-pointer" nzType="close" nzTheme="outline" (click)="onTaskDelete(todo.id)" />
+              </span>
             </li>
           }
         </ul>

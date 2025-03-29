@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo.model';
-import { AddTodo, LoadTodos } from '../../store/todo/todo.actions';
+import { AddTodo, LoadTodos, DeleteTodo } from '../../store/todo/todo.actions';
 import { TodoState } from '../../store/todo/todo.state';
 import { FormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,7 +19,8 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     NzFormModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzIconModule
   ],
   templateUrl: './organizer.component.html',
   styleUrl: './organizer.component.scss'
@@ -40,5 +42,9 @@ export class OrganizerComponent implements OnInit {
       this.store.dispatch(new AddTodo(this.taskName));
       this.taskName = ' ';
     }
+  }
+
+  onTaskDelete(id: string): void {
+    this.store.dispatch(new DeleteTodo(id))
   }
 }

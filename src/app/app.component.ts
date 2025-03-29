@@ -1,10 +1,6 @@
 import { Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { NavbarComponent } from './components/navbar/navbar.component'
-import { StarterComponent } from './pages/starter/starter.component'
-import { LoginComponent } from './pages/login/login.component'
-import { RegisterComponent } from './pages/register/register.component'
-import { OrganizerComponent } from './pages/organizer/organizer.component'
 
 @Component({
   selector: 'app-root',
@@ -12,10 +8,6 @@ import { OrganizerComponent } from './pages/organizer/organizer.component'
   imports: [
     RouterOutlet,
     NavbarComponent,
-    StarterComponent,
-    LoginComponent,
-    RegisterComponent,
-    OrganizerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

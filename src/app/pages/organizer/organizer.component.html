@@ -1,1 +1,40 @@
-<p>organizer works!</p>
+<div class="organizer-form bg-blue-950 rounded-md p-5">
+  <p class="organizer-title text-blue-100 text-2xl font-semibold">Tasks</p>
+
+  <form nz-form (ngSubmit)="addTask()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input a task name">
+        <nz-input-group nzPrefixIcon="check-square">
+          <input
+            nz-input
+            type="text"
+            id="organizer-input"
+            placeholder="Task Title"
+            [(ngModel)]="taskName"
+            name="taskName"
+            required
+          />
+          <button nz-button nzType="primary" type="submit">Add</button>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <div class="task-container">
+    @if (todos$ | async; as todos) {
+      @if (!todos.length) {
+        <div class="text-blue-100 text-center">
+          No tasks yet. Add some tasks to get started!
+        </div>
+      } @else {
+        <ul class="todo-list">
+          @for (todo of todos; track todo.id) {
+            <li class="todo-item">
+              <span [class.completed]="todo.isCompleted">{{ todo.name }}</span>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </div>
+</div>

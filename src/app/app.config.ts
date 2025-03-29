@@ -9,9 +9,20 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngxs/store';
+import { withNgxsLoggerPlugin } from '@ngxs/logger-plugin';
+import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
+import { TodoState } from './store/todo/todo.state';
 
 registerLocaleData(en);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideStore([]), provideNzI18n(en_US), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient()]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideNzI18n(en_US),
+    importProvidersFrom(FormsModule),
+    provideAnimationsAsync(),
+    provideHttpClient(),
+    provideStore([TodoState], withNgxsLoggerPlugin(), withNgxsReduxDevtoolsPlugin())
+  ]
 };

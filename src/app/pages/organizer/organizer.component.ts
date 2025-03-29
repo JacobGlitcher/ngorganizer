@@ -32,10 +32,14 @@ import { CommonModule } from '@angular/common';
 })
 export class OrganizerComponent implements OnInit {
   taskName: string = '';
-  todos$: Observable<Todo[]>;
+  allTodos$: Observable<Todo[]>;
+  activeTodos$: Observable<Todo[]>;
+  completedTodos$: Observable<Todo[]>;
 
   constructor(private store: Store) {
-    this.todos$ = this.store.select(TodoState.getTodos);
+    this.allTodos$ = this.store.select(TodoState.getTodos);
+    this.activeTodos$ = this.store.select(TodoState.getActiveTodos);
+    this.completedTodos$ = this.store.select(TodoState.getCompletedTodos);
   }
 
   ngOnInit(): void {

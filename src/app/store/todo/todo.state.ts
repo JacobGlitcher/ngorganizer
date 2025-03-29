@@ -27,6 +27,16 @@ export class TodoState {
     return state.todos;
   }
 
+  @Selector()
+  static getActiveTodos(state: TodoStateModel): Todo[] {
+    return state.todos.filter(todo => !todo.isCompleted)
+  }
+
+  @Selector()
+  static getCompletedTodos(state: TodoStateModel): Todo[] {
+    return state.todos.filter(todo => todo.isCompleted)
+  }
+
   @Action(LoadTodos)
   loadTodos(ctx: StateContext<TodoStateModel>) {
     return this.todoService.getTodos().pipe(

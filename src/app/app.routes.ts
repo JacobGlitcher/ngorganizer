@@ -11,16 +11,16 @@ import { noAuthGuard } from './guards/no-auth.guard';
 
 export const routes: Routes = [
   { path: '', component: StarterComponent },
-  { path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [noAuthGuard] }, // added guard to redirect the user if logged in
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [noAuthGuard],
+    canActivate: [noAuthGuard], // added guard to redirect the user if logged in
   },
   {
     path: 'organizer',
     component: OrganizerComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard], // added guard to protect the route
   },
   { path: '**', redirectTo: '' },
 ];

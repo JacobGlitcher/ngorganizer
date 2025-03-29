@@ -52,6 +52,7 @@
           <div class="text-white">No tasks with this term</div>
         } @else {
           <ul class="todo-list">
+            <!-- because of the mock db doesn't support pagination, we need to slice the array manually to mock pagination behavior -->
             @let sliceActiveTodos = todos.slice(pageSize * pageIndex - 5, pageSize * pageIndex);
             @for (todo of sliceActiveTodos; track todo.id) {
               <li class="todo-item cursor-pointer" (click)="onTaskCompletionUpdate(todo.id)">

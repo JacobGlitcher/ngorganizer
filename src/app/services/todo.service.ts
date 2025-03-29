@@ -8,11 +8,9 @@ import { Todo } from '../models/todo.model';
   providedIn: 'root',
 })
 export class TodoService {
+  // public keys to the temporary bin from "jsonbin.io" API so you can test
   private apiUrl = 'https://api.jsonbin.io/v3/b/67e6d3308561e97a50f4afd3';
-  private masterKey =
-    '$2a$10$P3z4Of4OloaLiYeNtRVSwu663226y1A8F0VKaMw5qegeV6N0L1vUa';
-  // private apiUrl = 'https://api.jsonbin.io/v3/b/670f4afd3';
-  // private masterKey = '$2a$10$P3z4Of4OloaLiYeNtRVSwu1vUa';
+  private masterKey = '$2a$10$P3z4Of4OloaLiYeNtRVSwu663226y1A8F0VKaMw5qegeV6N0L1vUa';
 
   constructor(private http: HttpClient) {}
 
@@ -32,10 +30,6 @@ export class TodoService {
   }
 
   updateTodos(todos: Todo[]): Observable<object> {
-    return this.http.put(
-      this.apiUrl,
-      { todos },
-      { headers: this.getHeaders() }
-    );
+    return this.http.put(this.apiUrl, { todos }, { headers: this.getHeaders() });
   }
 }

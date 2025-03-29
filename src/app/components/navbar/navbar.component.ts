@@ -38,6 +38,7 @@ export class NavbarComponent {
     this.router.navigate(['/']);
   }
 
+  // Check if the current page is the login or register page for conditional rendering cases
   get isLoginOrRegisterPage(): boolean {
     return this.router.url === '/login' || this.router.url === '/register';
   }

@@ -64,3 +64,6 @@ ng build
 - The project showcases a mix of modern Angular features (Signals, Observables) alongside state management with NGXS.
 - Comments are added throughout the code to explain key implementation details.
 - The application is deployed to Vercel, and the live URL can be shared upon request.
+
+## Live
+- The application is deployed on Vercel. You can access it [here](https://ngorganizer.vercel.app/).
